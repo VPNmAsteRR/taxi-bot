@@ -1,0 +1,21 @@
+services:
+  taxi-bot:
+    build: .
+    container_name: taxi-bot
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATA_DIR: /data
+      TZ: Europe/Moscow
+    volumes:
+      - taxi-data:/data
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+volumes:
+  taxi-data:

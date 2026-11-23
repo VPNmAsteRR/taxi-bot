@@ -1,0 +1,22 @@
+[Unit]
+Description=TAXIDRIVE24/7 Telegram bots
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=taxi
+Group=taxi
+WorkingDirectory=/opt/taxi-bot
+EnvironmentFile=/etc/taxi-bot.env
+ExecStart=/usr/bin/python3 /opt/taxi-bot/bot.py
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/taxi-bot
+
+[Install]
+WantedBy=multi-user.target
